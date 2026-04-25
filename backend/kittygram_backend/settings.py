@@ -4,11 +4,11 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-cg6*%6d51ef8f#4!r3*$vmxm4)abgjw8mo!4y-q*uq1!4$-89$'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key')
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['158.160.251.106', '127.0.0.1', 'localhost', 'kittygramer.ru']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -35,6 +35,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'kittygram_backend.urls'
 
+CSRF_TRUSTED_ORIGINS = [
+    'http://158.160.251.106:9000',
+    'http://localhost:9000',
+    'https://kittygramer.ru',
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -56,8 +62,12 @@ WSGI_APPLICATION = 'kittygram_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('POSTGRES_DB', 'django'),
+        'USER': os.getenv('POSTGRES_USER', 'django'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
+        'HOST': os.getenv('DB_HOST', ''),
+        'PORT': os.getenv('DB_PORT', 5432),
     }
 }
 
@@ -92,9 +102,10 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/backend_static'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = '/media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

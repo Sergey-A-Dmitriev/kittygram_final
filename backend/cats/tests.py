@@ -1,3 +1,5 @@
+"""Модуль тесты."""
+
 from http import HTTPStatus
 
 from django.contrib.auth import get_user_model
@@ -6,7 +8,10 @@ from rest_framework.test import APIClient
 
 
 class CatsAPITestCase(TestCase):
+    """Тест CatsAPI."""
+
     def setUp(self):
+        """Подготовка user, client и аутентификации для теста."""
         User = get_user_model()
         self.user = User.objects.create_user(username='auth_user')
         self.client = APIClient()

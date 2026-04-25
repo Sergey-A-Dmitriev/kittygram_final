@@ -1,0 +1,5 @@
+"""Константы."""
+
+SIZE_TEXT_FIELD = 30
+SIZE_ACHIV_NAME_FIELD = 64
+SIZE_FIELD = 16
