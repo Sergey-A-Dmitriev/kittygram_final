@@ -1,15 +1,13 @@
-FROM node:18
+FROM node:18 AS builder
 WORKDIR /app
-
-COPY package.json package.json
-COPY package-lock.json package-lock.json
-
-RUN npm ci
-
+COPY package.json package-lock.json ./
+RUN npm ci --only=production
 COPY . .
 RUN npm run build
-# RUN npm install --global http-server
-
 FROM alpine:latest
-COPY --from=builder /app/build /static
-# CMD ["npx", "-y", "http-server", "-p", "8000", "/app/build"]
+RUN adduser -D -u 1000 static
+RUN mkdir -p /static && chown -R static:static /static
+COPY --from=builder --chown=static:static /app/build /static
+VOLUME ["/static"]
+USER static
+CMD ["sh", "-c", "echo 'Static volume is ready' && sleep infinity"]
