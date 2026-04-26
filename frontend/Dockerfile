@@ -1,13 +1,14 @@
-FROM node:18 AS builder
+FROM node:18
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci --only=production
+
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+
+RUN npm install
+
 COPY . .
 RUN npm run build
-FROM alpine:latest
-RUN adduser -D -u 1000 static
-RUN mkdir -p /static && chown -R static:static /static
-COPY --from=builder --chown=static:static /app/build /static
-VOLUME ["/static"]
-USER static
-CMD ["sh", "-c", "echo 'Static volume is ready' && sleep infinity"]
+
+# Эта команда запустит встроенный сервер на Node.js, который будет раздавать
+# содержимое директории /app/build на порте 8000
+CMD ["npx", "-y", "http-server", "-p", "8000", "/app/build"] 
