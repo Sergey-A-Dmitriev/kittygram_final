@@ -1,7 +1,8 @@
 """Модуль Админка."""
 
-from cats.models import Achievement, Cat
 from django.contrib import admin
+
+from cats.models import Achievement, Cat
 
 
 @admin.register(Achievement)

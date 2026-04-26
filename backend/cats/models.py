@@ -1,8 +1,9 @@
 """Модуль для описания моделей приложения cats."""
 
-from cats.constants import SIZE_ACHIV_NAME_FIELD, SIZE_FIELD, SIZE_TEXT_FIELD
 from django.contrib.auth import get_user_model
 from django.db import models
+
+from cats.constants import SIZE_ACHIV_NAME_FIELD, SIZE_FIELD, SIZE_TEXT_FIELD
 
 User = get_user_model()
 
