@@ -19,7 +19,7 @@ services:
   frontend:
     env_file: .env
     image: sadmitriev/kittygram_frontend
-    command: cp -r /app/build/. /static/
+    command: cp -r /app/build/. /
     volumes:
       - static:/static
   gateway:
