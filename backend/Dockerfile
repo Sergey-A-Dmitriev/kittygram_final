@@ -1,4 +1,4 @@
-FROM python:3.12
+FROM python:3.12-slim
 WORKDIR /app
 RUN pip install gunicorn==25.3.0
 COPY requirements.txt .
