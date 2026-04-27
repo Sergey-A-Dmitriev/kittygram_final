@@ -171,5 +171,5 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: Commit ${{ github.event.commits[0].message }} выполнен ${{ github.actor }}. Деплой успешно выполнен!
+        message: Commit ${{ github.event.commits[0].message }} выполнен  ${{ github.actor }}. Деплой успешно выполнен!
     
