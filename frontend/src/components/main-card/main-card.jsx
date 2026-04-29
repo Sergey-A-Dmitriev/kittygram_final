@@ -9,6 +9,7 @@ export const MainCard = ({
   cardId,
   name = "",
   date = "",
+  age = "",
   color = "Бежевый",
   img,
   extraClass = "",
@@ -41,6 +42,9 @@ export const MainCard = ({
             className={`text text_type_medium-20 text_color_secondary mb-8 ${styles.date}`}
           >
             {date}
+          </p>
+          <p className={`text text_type_medium-20 text_color_secondary mb-8`}>
+            Возраст: {age} {age === 1 ? 'год' : (age >= 2 && age <= 4 ? 'года' : 'лет')}
           </p>
         </div>
         <div
