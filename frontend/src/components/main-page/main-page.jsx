@@ -14,6 +14,10 @@ export const MainPage = ({ queryPage, setQueryPage, extraClass = "" }) => {
   React.useEffect(() => {
     getCards(queryPage)
       .then((res) => {
+        console.log('=== MainPage Debug ===');
+        console.log('First cat from API:', res.results[0]);
+        console.log('Age field:', res.results[0]?.age);
+        
         setPagData({
           count: res.count,
           pages: Math.ceil(res.count / 10),
@@ -49,6 +53,7 @@ export const MainPage = ({ queryPage, setQueryPage, extraClass = "" }) => {
       </h2>
       <div className={styles.box}>
         {cards.map((item, index) => {
+          console.log('Rendering cat:', item.name, 'age:', item.age);
           return (
             <MainCard
               cardId={item.id}
